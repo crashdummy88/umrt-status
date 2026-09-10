@@ -1,5 +1,11 @@
-# umrt-status
+# umrt-status (soft develop)
 
-Soft Cloudflare Pages status site for United Mobile RV LLC.
+Tiny multi-page status site for United Mobile RV LLC.
 
-Hours · route notes · announcements. Soft develop 2026-09-10.
+## Pages
+- `/` status
+- `/hours/` scheduling notes
+- `/route/` corridor MT·WY·ID·WA
+- `/announcements/` soft board (example data labeled)
+
+See ecosystem plan: soft siblings docs / areas / quote / portal / admin come later.
