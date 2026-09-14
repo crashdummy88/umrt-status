@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://umrt-status.pages.dev/sitemap.xml
+Sitemap: https://status.unitedmobilerv.com/sitemap.xml
