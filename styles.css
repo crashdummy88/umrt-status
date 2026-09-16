@@ -135,10 +135,10 @@ h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .75rem; }
 .loc-grid > .loc-tile:last-child { grid-column: 1 / -1; min-height: auto; }
 article.loc-tile { cursor: default; }
 .loc-tile {
-  display: flex; flex-direction: column; align-items: flex-start; gap: .35rem;
-  text-align: left; background: var(--black); color: var(--ink);
+  display: grid; grid-template-columns: 1fr auto; align-items: start;
+  gap: .35rem .75rem; text-align: left; background: var(--black); color: var(--ink);
   border: 2px solid transparent; border-radius: 10px; padding: 1rem;
-  cursor: pointer; font-family: inherit; min-height: 8.5rem;
+  cursor: pointer; font-family: inherit;
 }
 .loc-tile.is-active { border-color: var(--gold); }
 .loc-tile.loc-ok { box-shadow: inset 4px 0 0 var(--ok); }
@@ -146,6 +146,8 @@ article.loc-tile { cursor: default; }
 .loc-tile.loc-down { box-shadow: inset 4px 0 0 var(--down); }
 .loc-tile.loc-unknown { box-shadow: inset 4px 0 0 var(--unknown); }
 .loc-title { font-size: 1.35rem; font-weight: 800; letter-spacing: .04em; }
+.loc-tile > .pill { grid-column: 2; grid-row: 1; }
+.loc-sub, .loc-note { grid-column: 1 / -1; }
 .loc-sub { font-size: .85rem; color: rgba(255,255,255,.65); }
 .loc-note { margin: .35rem 0 0; font-size: .9rem; color: rgba(255,255,255,.8); }
 #location-detail, .location-detail {
