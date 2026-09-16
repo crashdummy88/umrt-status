@@ -1,0 +1,94 @@
+{
+  "updated": "2026-09-16",
+  "headline": "Active corridor: Montana · Wyoming · Idaho · Washington. Winter expansion this winter: Oregon · California · New Mexico · Nevada · Arizona. Prefer Text for ETA — no winter service dates posted yet.",
+  "preferText": {
+    "label": "Prefer Text (616) 606-5277",
+    "href": "tel:+16166065277"
+  },
+  "book": {
+    "label": "Book Online",
+    "href": "https://book.unitedmobilerv.com/"
+  },
+  "corridor": ["MT", "WY", "ID", "WA"],
+  "groupLabels": {
+    "active": "Active corridor"
+  },
+  "locations": [
+    {
+      "id": "mt",
+      "code": "MT",
+      "name": "Montana",
+      "state": "open",
+      "note": "On the active corridor. Text city/ZIP for the next window."
+    },
+    {
+      "id": "wy",
+      "code": "WY",
+      "name": "Wyoming",
+      "state": "open",
+      "note": "On the active corridor. Cycling Alpine WY area this week — Prefer Text for ETA before you travel."
+    },
+    {
+      "id": "id",
+      "code": "ID",
+      "name": "Idaho",
+      "state": "open",
+      "note": "On the active corridor. Text for ETA before you book travel."
+    },
+    {
+      "id": "wa",
+      "code": "WA",
+      "name": "Washington",
+      "state": "open",
+      "note": "On the active corridor. Mountain passes and weather can limit same-week windows."
+    }
+  ],
+  "winterExpansion": {
+    "label": "Winter expansion",
+    "kicker": "Coming soon this winter — no service dates posted yet. Prefer Text with city/ZIP to get on the list.",
+    "locations": [
+      {
+        "id": "or",
+        "code": "OR",
+        "name": "Oregon",
+        "state": "seasonal",
+        "note": "Winter expansion this winter. Prefer Text with city/ZIP — no service dates posted yet."
+      },
+      {
+        "id": "ca",
+        "code": "CA",
+        "name": "California",
+        "state": "seasonal",
+        "note": "Winter expansion this winter. Prefer Text with city/ZIP — no service dates posted yet."
+      },
+      {
+        "id": "nm",
+        "code": "NM",
+        "name": "New Mexico",
+        "state": "seasonal",
+        "note": "Winter expansion this winter. Prefer Text with city/ZIP — no service dates posted yet."
+      },
+      {
+        "id": "nv",
+        "code": "NV",
+        "name": "Nevada",
+        "state": "seasonal",
+        "note": "Winter expansion this winter. Prefer Text with city/ZIP — no service dates posted yet."
+      },
+      {
+        "id": "az",
+        "code": "AZ",
+        "name": "Arizona",
+        "state": "seasonal",
+        "note": "Winter expansion this winter. Prefer Text with city/ZIP — no service dates posted yet."
+      }
+    ]
+  },
+  "beyond": {
+    "id": "beyond",
+    "name": "Beyond corridor",
+    "regions": "MI / WI / SD · MN / ND",
+    "state": "limited",
+    "note": "Case-by-case only. Prefer Text with city/ZIP — do not book travel until we confirm."
+  }
+}

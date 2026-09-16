@@ -13,14 +13,14 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://status.unitedmobilerv.com/assets/og/umrt-status-og-card.png" />
   <link rel="stylesheet" href="/styles.css" />
-  <title>Status · Hours &amp; route | United Mobile RV</title>
-  <meta name="description" content="Hours, active MT·WY·ID·WA corridor, and announcements from United Mobile RV. Prefer Text (616) 606-5277." />
+  <title>Status · Live systems &amp; corridor | United Mobile RV</title>
+  <meta name="description" content="Live United Mobile RV platform status, MT·WY·ID·WA corridor, OR·CA·NM·NV·AZ winter expansion, and Cloudflare. Prefer Text (616) 606-5277." />
   <link rel="canonical" href="https://status.unitedmobilerv.com/" />
-  <meta property="og:title" content="Status · Hours &amp; route | United Mobile RV" />
-  <meta property="og:description" content="Hours, route, announcements. Prefer Text for service." />
+  <meta property="og:title" content="Status · Live systems &amp; corridor | United Mobile RV" />
+  <meta property="og:description" content="Network, corridor, and Cloudflare status. Prefer Text for service." />
   <meta property="og:url" content="https://status.unitedmobilerv.com/" />
-  <meta name="twitter:title" content="Status · Hours &amp; route | United Mobile RV" />
-<link rel="stylesheet" href="/design/platform-bar.css">
+  <meta name="twitter:title" content="Status · Live systems &amp; corridor | United Mobile RV" />
+  <link rel="stylesheet" href="/design/platform-bar.css">
 </head>
 <body>
   <div class="umrt-platform-bar" role="navigation" aria-label="UMRT properties">
@@ -47,41 +47,144 @@
       <a href="https://book.unitedmobilerv.com/">Book</a>
     </nav>
   </header>
-  <main id="main" class="wrap">
-    <p class="eyebrow">Field status</p>
-    <h1>Where we are · how to reach us</h1>
-    <p class="lede">Owner-technician service. Prefer Text first — city/ZIP, rig, and what’s failing.</p>
-    <p class="btn-row">
-      <a class="btn" href="tel:+16166065277">Prefer Text (616) 606-5277</a>
-      <a class="btn btn-ghost" href="https://book.unitedmobilerv.com/">Book Online</a>
-    </p>
-    <section id="hours" class="card" aria-labelledby="hours-h">
-      <h2 id="hours-h"><a href="/hours/">Hours</a></h2>
-      <p>Mobile by appointment. Text for same-week windows when on corridor.</p>
-      <ul>
-        <li>Typical field days: Mon–Sat (season and weather dependent)</li>
-        <li>Sunday: emergency / Prefer Text triage only</li>
-        <li>Labor: 1 hr minimum · 30-min increments</li>
-      </ul>
+
+  <section id="overall" class="overall overall-checking" aria-live="polite">
+    <div class="wrap wrap-board">
+      <p class="overall-kicker">United Mobile RV status</p>
+      <h1 id="overall-label">Checking systems…</h1>
+      <p id="overall-meta" class="overall-meta">Probing the mesh from the edge. Not assuming all-clear.</p>
+    </div>
+  </section>
+
+  <main id="main" class="wrap wrap-board">
+    <div class="board-toolbar">
+      <p class="fine" id="refresh-stamp">Auto-refresh every 60 seconds</p>
+      <button type="button" class="btn btn-ghost" id="refresh-now">Refresh now</button>
+    </div>
+
+    <section class="board-section" aria-labelledby="network-h">
+      <h2 id="network-h">Network / platform</h2>
+      <p class="lede">Tap a property for the last probe. If we cannot confirm a host, it shows Unknown — we never paint the board all-green on a failed check.</p>
+      <div class="board" id="network-list">
+        <details class="svc" open>
+          <summary>
+            <span class="svc-copy">
+              <span class="svc-name">unitedmobilerv.com</span>
+              <span class="svc-label">WordPress hub</span>
+            </span>
+            <span class="pill pill-unknown" aria-label="Checking">Checking</span>
+          </summary>
+          <div class="svc-detail"><p>Waiting on /api/health.</p></div>
+        </details>
+      </div>
     </section>
-    <section id="route" class="card" aria-labelledby="route-h">
-      <h2 id="route-h"><a href="/route/">Active corridor</a></h2>
-      <p><strong>MT · WY · ID · WA</strong> active. MI / WI / SD and MN / ND / OR case-by-case.</p>
-      <p class="fine">Currently cycling Alpine WY area — Prefer Text for ETA before you book travel.</p>
+
+    <section class="board-section" aria-labelledby="location-h">
+      <h2 id="location-h">Location / corridor</h2>
+      <p class="lede" id="location-headline">Active corridor: Montana · Wyoming · Idaho · Washington. Winter expansion this winter: Oregon · California · New Mexico · Nevada · Arizona. Prefer Text for ETA — no winter service dates posted yet.</p>
+      <div id="location-groups">
+        <div class="loc-group" data-group="active">
+          <h3>Active corridor</h3>
+          <div class="loc-grid" id="location-grid">
+            <button type="button" class="loc-tile loc-ok is-active" data-loc="mt" aria-pressed="true">
+              <span class="loc-title">MT</span>
+              <span class="loc-sub">Montana</span>
+              <span class="pill pill-ok" aria-label="Open">Open</span>
+            </button>
+            <button type="button" class="loc-tile loc-ok" data-loc="wy" aria-pressed="false">
+              <span class="loc-title">WY</span>
+              <span class="loc-sub">Wyoming</span>
+              <span class="pill pill-ok" aria-label="Open">Open</span>
+            </button>
+            <button type="button" class="loc-tile loc-ok" data-loc="id" aria-pressed="false">
+              <span class="loc-title">ID</span>
+              <span class="loc-sub">Idaho</span>
+              <span class="pill pill-ok" aria-label="Open">Open</span>
+            </button>
+            <button type="button" class="loc-tile loc-ok" data-loc="wa" aria-pressed="false">
+              <span class="loc-title">WA</span>
+              <span class="loc-sub">Washington</span>
+              <span class="pill pill-ok" aria-label="Open">Open</span>
+            </button>
+          </div>
+        </div>
+        <div class="loc-group" data-group="winter">
+          <h3>Winter expansion</h3>
+          <p class="loc-group-kicker">Coming soon this winter — no service dates posted yet. Prefer Text with city/ZIP to get on the list.</p>
+          <div class="loc-grid">
+            <button type="button" class="loc-tile loc-warn" data-loc="or" aria-pressed="false">
+              <span class="loc-title">OR</span>
+              <span class="loc-sub">Oregon</span>
+              <span class="pill pill-warn" aria-label="Coming soon">Coming soon</span>
+            </button>
+            <button type="button" class="loc-tile loc-warn" data-loc="ca" aria-pressed="false">
+              <span class="loc-title">CA</span>
+              <span class="loc-sub">California</span>
+              <span class="pill pill-warn" aria-label="Coming soon">Coming soon</span>
+            </button>
+            <button type="button" class="loc-tile loc-warn" data-loc="nm" aria-pressed="false">
+              <span class="loc-title">NM</span>
+              <span class="loc-sub">New Mexico</span>
+              <span class="pill pill-warn" aria-label="Coming soon">Coming soon</span>
+            </button>
+            <button type="button" class="loc-tile loc-warn" data-loc="nv" aria-pressed="false">
+              <span class="loc-title">NV</span>
+              <span class="loc-sub">Nevada</span>
+              <span class="pill pill-warn" aria-label="Coming soon">Coming soon</span>
+            </button>
+            <button type="button" class="loc-tile loc-warn" data-loc="az" aria-pressed="false">
+              <span class="loc-title">AZ</span>
+              <span class="loc-sub">Arizona</span>
+              <span class="pill pill-warn" aria-label="Coming soon">Coming soon</span>
+            </button>
+          </div>
+        </div>
+        <div class="loc-group" data-group="beyond">
+          <h3>Beyond corridor</h3>
+          <div class="loc-grid">
+            <button type="button" class="loc-tile loc-warn" data-loc="beyond" aria-pressed="false">
+              <span class="loc-title">Beyond corridor</span>
+              <span class="loc-sub">MI / WI / SD · MN / ND</span>
+              <span class="pill pill-warn" aria-label="Limited">Limited</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <p class="location-detail" id="location-detail">Montana is on corridor. Text city/ZIP for the next window.</p>
+      <p class="btn-row loc-cta">
+        <a class="btn" href="tel:+16166065277">Prefer Text (616) 606-5277</a>
+        <a class="btn btn-ghost" href="https://book.unitedmobilerv.com/">Book Online</a>
+      </p>
     </section>
-    <section id="announce" class="card" aria-labelledby="announce-h">
-      <h2 id="announce-h"><a href="/announcements/">Announcements</a></h2>
-      <article class="note">
-        <h3>Seasonal line items</h3>
-        <p>Winterize <strong>$175</strong> · Trip-prep <strong>$225</strong> (separate). Trip fee truth on live site when you book.</p>
-      </article>
-      <article class="note">
-        <h3>Credentials (exact)</h3>
-        <p>Victron Professional Certified Installer · weBoost Authorized Installer · Peplink Certified Associate · Starlink installs only (never “Certified”).</p>
-      </article>
+
+    <section class="board-section" aria-labelledby="cf-h">
+      <h2 id="cf-h">Cloudflare</h2>
+      <p class="lede">Public Statuspage for Pages, DNS, and Workers — the edge this board runs on.</p>
+      <div class="board cf-strip" id="cf-body">
+        <p>Loading Cloudflare status… <a href="https://www.cloudflarestatus.com/" rel="noopener">cloudflarestatus.com</a></p>
+      </div>
+    </section>
+
+    <section class="board-section" aria-labelledby="more-h">
+      <h2 id="more-h">Hours, route &amp; announcements</h2>
+      <p class="lede">Same field pages as before — linked, not replaced.</p>
+      <div class="more-grid">
+        <article class="card" aria-labelledby="hours-h">
+          <h2 id="hours-h"><a href="/hours/">Hours</a></h2>
+          <p>Mobile by appointment. Mon–Sat typical · Sunday triage only · 1 hr minimum.</p>
+        </article>
+        <article class="card" aria-labelledby="route-h">
+          <h2 id="route-h"><a href="/route/">Route</a></h2>
+          <p>MT · WY · ID · WA active · OR · CA · NM · NV · AZ winter expansion.</p>
+        </article>
+        <article class="card" aria-labelledby="announce-h">
+          <h2 id="announce-h"><a href="/announcements/">Announcements</a></h2>
+          <p>Winterize $175 · trip-prep $225. Victron Professional · weBoost Authorized · Peplink Certified Associate.</p>
+        </article>
+      </div>
     </section>
   </main>
-  <footer class="foot wrap">
+  <footer class="foot wrap wrap-board">
     <p>United Mobile RV LLC · Prefer Text <a href="tel:+16166065277">(616) 606-5277</a></p>
     <p class="fine">
       <a href="https://unitedmobilerv.com/">Main Hub</a> ·
@@ -97,5 +200,7 @@
     <a class="btn btn-ghost" href="tel:+16166065277">Call / Text</a>
     <a class="btn" href="https://book.unitedmobilerv.com/">Book Online</a>
   </div>
+  <script src="/js/locations.js" defer></script>
+  <script src="/js/status-board.js" defer></script>
 </body>
 </html>
