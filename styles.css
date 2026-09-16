@@ -128,11 +128,24 @@ h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .75rem; }
 .pill-down { background: #FF6B5B; }
 .pill-unknown { background: #B0B0B0; }
 
+.loc-group { margin: 1.15rem 0 0; }
+.loc-group h3 {
+  margin: 0 0 .4rem;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+}
+.loc-group-kicker {
+  margin: 0 0 .7rem;
+  font-size: .92rem;
+  color: var(--gray);
+}
 .loc-grid {
   display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem;
 }
-.loc-tile[data-loc="beyond"],
-.loc-grid > .loc-tile:last-child { grid-column: 1 / -1; min-height: auto; }
+.loc-tile[data-loc="beyond"] { grid-column: 1 / -1; min-height: auto; }
 article.loc-tile { cursor: default; }
 .loc-tile {
   display: grid; grid-template-columns: 1fr auto; align-items: start;

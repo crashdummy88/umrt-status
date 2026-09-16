@@ -9,7 +9,7 @@ const SYSTEM_LABELS = {
   checking: "Checking",
 };
 
-const LOCATION_LABELS = {
+const LOCATION_LABELS = (window.UMRTLocations && window.UMRTLocations.LABELS) || {
   open: "Open",
   limited: "Limited",
   closed: "Closed",
@@ -52,6 +52,7 @@ function toneForSystem(state) {
 }
 
 function toneForLocation(state) {
+  if (window.UMRTLocations) return window.UMRTLocations.tone(state);
   if (state === "open") return "ok";
   if (state === "limited" || state === "seasonal") return "warn";
   if (state === "closed") return "down";
@@ -134,54 +135,78 @@ function renderComponents(components, errorDetail) {
 }
 
 function locationItems(data) {
+  if (window.UMRTLocations) return window.UMRTLocations.allItems(data);
   const items = Array.isArray(data.locations) ? data.locations.slice() : [];
   if (data.beyond) items.push({ ...data.beyond, beyond: true });
   return items;
 }
 
+function locationPill(loc, groupId) {
+  if (window.UMRTLocations) return window.UMRTLocations.pill(loc, groupId);
+  return loc.pill || LOCATION_LABELS[loc.state] || loc.state;
+}
+
+function renderLocationTile(loc, groupId, active) {
+  const state = loc.state || "unknown";
+  const tone = toneForLocation(state);
+  const pill = locationPill(loc, groupId);
+  const title = loc.beyond ? loc.name : loc.code || loc.name;
+  const sub = loc.beyond ? loc.regions || "" : loc.name || "";
+  return `<button type="button" class="loc-tile loc-${tone}${active ? " is-active" : ""}" data-loc="${escapeHtml(
+    loc.id
+  )}" aria-pressed="${active ? "true" : "false"}">
+    <span class="loc-title">${escapeHtml(title)}</span>
+    <span class="loc-sub">${escapeHtml(sub)}</span>
+    <span class="pill pill-${tone}" aria-label="${escapeHtml(pill)}">${escapeHtml(pill)}</span>
+  </button>`;
+}
+
 function renderLocations(data) {
-  const grid = $("location-grid");
+  const mount = $("location-groups") || $("location-grid");
   const headline = $("location-headline");
   const detail = $("location-detail");
-  if (!grid || !data || !data.locations) return;
+  if (!mount || !data) return;
   if (headline && data.headline) headline.textContent = data.headline;
-  const items = locationItems(data);
-  if (!items.length) return;
-  grid.innerHTML = items
-    .map((loc, index) => {
-      const state = loc.state || "unknown";
-      const tone = toneForLocation(state);
-      const pill = LOCATION_LABELS[state] || state;
-      const title = loc.beyond ? loc.name : loc.code || loc.name;
-      const sub = loc.beyond ? loc.regions || "" : loc.name || "";
-      return `<button type="button" class="loc-tile loc-${tone}${index === 0 ? " is-active" : ""}" data-loc="${escapeHtml(
-        loc.id
-      )}" aria-pressed="${index === 0 ? "true" : "false"}">
-        <span class="loc-title">${escapeHtml(title)}</span>
-        <span class="loc-sub">${escapeHtml(sub)}</span>
-        <span class="pill pill-${tone}" aria-label="${escapeHtml(pill)}">${escapeHtml(pill)}</span>
-      </button>`;
+  const groups = window.UMRTLocations
+    ? window.UMRTLocations.groupsFrom(data)
+    : [{ id: "active", label: "Active corridor", kicker: "", items: locationItems(data) }];
+  if (!groups.length) return;
+  mount.innerHTML = groups
+    .map((group) => {
+      const kicker = group.kicker
+        ? `<p class="loc-group-kicker">${escapeHtml(group.kicker)}</p>`
+        : "";
+      const tiles = group.items
+        .map((loc, index) => renderLocationTile(loc, group.id, group.id === "active" && index === 0))
+        .join("");
+      return `<div class="loc-group" data-group="${escapeHtml(group.id)}">
+        <h3>${escapeHtml(group.label)}</h3>
+        ${kicker}
+        <div class="loc-grid">${tiles}</div>
+      </div>`;
     })
     .join("");
 
+  const items = locationItems(data);
   const show = (id) => {
     const loc = items.find((item) => item.id === id) || items[0];
     if (!detail || !loc) return;
-    const pill = LOCATION_LABELS[loc.state] || loc.state;
+    const groupId = loc.group || (loc.beyond ? "beyond" : "active");
+    const pill = locationPill(loc, groupId);
     detail.innerHTML = `<strong>${escapeHtml(loc.name)}</strong> · ${escapeHtml(pill)}. ${escapeHtml(
       loc.note || ""
     )}`;
-    grid.querySelectorAll(".loc-tile").forEach((btn) => {
+    mount.querySelectorAll(".loc-tile").forEach((btn) => {
       const on = btn.getAttribute("data-loc") === loc.id;
       btn.classList.toggle("is-active", on);
       btn.setAttribute("aria-pressed", on ? "true" : "false");
     });
   };
 
-  grid.querySelectorAll(".loc-tile").forEach((btn) => {
+  mount.querySelectorAll(".loc-tile").forEach((btn) => {
     btn.addEventListener("click", () => show(btn.getAttribute("data-loc")));
   });
-  show(items[0].id);
+  if (items[0]) show(items[0].id);
 }
 
 function renderCloudflare(data) {
@@ -242,7 +267,10 @@ async function refresh() {
   }
 
   renderCloudflare(cfRaw);
-  if (locationsRaw && (locationsRaw.locations || locationsRaw.headline)) {
+  if (
+    locationsRaw &&
+    (locationsRaw.locations || locationsRaw.winterExpansion || locationsRaw.headline)
+  ) {
     renderLocations(locationsRaw);
   }
   if (stamp) stamp.textContent = formatChecked((health && health.checkedAt) || cfRaw.checkedAt);
