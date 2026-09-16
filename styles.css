@@ -2,25 +2,36 @@
   --black: #1A1A1A;
   --gold: #C9972C;
   --white: #FFFFFF;
-  --light: #F5F5F5;
-  --gray: #666666;
+  /* 2026-09-16: was a light grey card fill on a white page -- flipped to a
+     translucent white panel over --black to match the rest of the UMRT
+     family (portal/docs/shop/mothership all use a dark theme; this was
+     the one site left on a stray light background, reported live). */
+  --light: rgba(255, 255, 255, .04);
+  --line: rgba(255, 255, 255, .12);
+  --gray: #A3A3A3;
   --max: 42rem;
 }
 * { box-sizing: border-box; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: var(--black);
-  background: var(--white);
+  color: var(--white);
+  background: var(--black);
   line-height: 1.5;
 }
+/* Baseline for any bare <a> not covered by a more specific rule below --
+   without this, an unstyled link (e.g. "Status home" in .fine) falls back
+   to the browser's default blue/purple, which reads as broken on a dark
+   page. Specific contexts (.top a, .card a, .foot a, .btn) override this. */
+a { color: var(--gold); }
+a:visited { color: var(--gold); }
 .skip {
   position: absolute; left: -999px; top: auto;
 }
-.skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--gold); padding: .5rem 1rem; }
+.skip:focus { left: 1rem; top: 1rem; z-index: 10; background: var(--gold); color: var(--black); padding: .5rem 1rem; }
 .top {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
-  gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid #eee; background: var(--black);
+  gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); background: var(--black);
 }
 .top a { color: var(--white); text-decoration: none; }
 .top nav { display: flex; flex-wrap: wrap; gap: 1rem; font-size: .95rem; }
@@ -28,27 +39,32 @@ body {
 .brand img { display: block; height: 40px; width: auto; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
 .eyebrow { text-transform: uppercase; letter-spacing: .08em; color: var(--gold); font-size: .75rem; font-weight: 700; margin: 0 0 .5rem; }
-h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .75rem; }
+h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 .75rem; color: var(--white); }
 .lede { color: var(--gray); margin: 0 0 1.25rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
 .btn {
   display: inline-block; background: var(--gold); color: var(--black); font-weight: 700;
   padding: .7rem 1.1rem; border-radius: 4px; text-decoration: none;
 }
-.btn-ghost { background: transparent; border: 2px solid var(--black); }
+.btn-ghost { background: transparent; border: 2px solid var(--white); color: var(--white); }
 .card {
-  background: var(--light); border-radius: 8px; padding: 1.25rem 1.25rem 1rem;
+  background: var(--light); border: 1px solid var(--line); border-radius: 8px; padding: 1.25rem 1.25rem 1rem;
   margin-bottom: 1rem;
 }
-.card h2 { margin: 0 0 .5rem; font-size: 1.15rem; }
+.card h2 { margin: 0 0 .5rem; font-size: 1.15rem; color: var(--white); }
+.card h2 a { color: inherit; text-decoration: none; }
+.card h2 a:hover { color: var(--gold); }
 .card ul { margin: .5rem 0 0; padding-left: 1.2rem; }
-.note { border-top: 1px solid #ddd; padding-top: .75rem; margin-top: .75rem; }
-.note h3 { margin: 0 0 .35rem; font-size: 1rem; }
+.card a:not(.btn) { color: var(--gold); }
+.note { border-top: 1px solid var(--line); padding-top: .75rem; margin-top: .75rem; }
+.note h3 { margin: 0 0 .35rem; font-size: 1rem; color: var(--white); }
 .fine { font-size: .85rem; color: var(--gray); }
-.foot { border-top: 1px solid #eee; padding-top: 1.5rem; margin-top: 1rem; }
-.foot a { color: var(--black); }
+.foot { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 1rem; color: var(--gray); }
+.foot a { color: var(--white); }
+.foot a:hover { color: var(--gold); }
 
-/* Sticky mobile action bar -- added 2026-09-16, matches mothership pattern */
-.mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(255,255,255,0.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid #ddd;padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -8px 24px rgba(0,0,0,0.12)}
+/* Sticky mobile action bar -- matches mothership pattern */
+.mobile-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(26,26,26,0.97);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));gap:10px;box-shadow:0 -8px 24px rgba(0,0,0,0.35)}
 .mobile-bar .btn{flex:1;min-height:44px;text-align:center;margin:0;padding:.55rem .4rem;font-size:.82rem;line-height:1.2}
+.mobile-bar .btn-ghost{color:var(--white)}
 @media (max-width:900px){.mobile-bar{display:flex}body{padding-bottom:88px}}
