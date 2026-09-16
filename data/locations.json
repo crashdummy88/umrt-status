@@ -1,0 +1,50 @@
+{
+  "updated": "2026-09-16",
+  "headline": "Currently cycling Alpine WY area — Prefer Text for ETA before you book travel.",
+  "preferText": {
+    "label": "Prefer Text (616) 606-5277",
+    "href": "tel:+16166065277"
+  },
+  "book": {
+    "label": "Book Online",
+    "href": "https://book.unitedmobilerv.com/"
+  },
+  "corridor": ["MT", "WY", "ID", "WA"],
+  "locations": [
+    {
+      "id": "mt",
+      "code": "MT",
+      "name": "Montana",
+      "state": "open",
+      "note": "On corridor. Text city/ZIP for the next window."
+    },
+    {
+      "id": "wy",
+      "code": "WY",
+      "name": "Wyoming",
+      "state": "open",
+      "note": "Cycling Alpine WY area this week. Prefer Text for ETA before you travel."
+    },
+    {
+      "id": "id",
+      "code": "ID",
+      "name": "Idaho",
+      "state": "open",
+      "note": "On corridor. Text for ETA before you book travel."
+    },
+    {
+      "id": "wa",
+      "code": "WA",
+      "name": "Washington",
+      "state": "open",
+      "note": "On corridor. Mountain passes and weather can limit same-week windows."
+    }
+  ],
+  "beyond": {
+    "id": "beyond",
+    "name": "Beyond corridor",
+    "regions": "MI / WI / SD · MN / ND / OR",
+    "state": "limited",
+    "note": "Case-by-case only. Prefer Text with city/ZIP — do not book travel until we confirm."
+  }
+}
