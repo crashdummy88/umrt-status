@@ -1,5 +1,6 @@
 # Soft convert → live (never whole-hub)
-/go/book   https://united-mobile-rv-llc.square.site/  302
-/go/book/  https://united-mobile-rv-llc.square.site/  302
+# Book → book.unitedmobilerv.com suite; Square stays BOOK ONLINE inside the suite
+/go/book   https://book.unitedmobilerv.com/  302
+/go/book/  https://book.unitedmobilerv.com/  302
 /go/text   /#main  302
 /go/home   https://unitedmobilerv.com/  302
