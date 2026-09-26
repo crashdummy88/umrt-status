@@ -1,4 +1,9 @@
-# status.unitedmobilerv.com is retired. Every path 301s to the apex.
+# Soft convert → live (never whole-hub)
+/go/book   https://united-mobile-rv-llc.square.site/  302
+/go/book/  https://united-mobile-rv-llc.square.site/  302
+/go/text   /#main  302
+/go/home   https://unitedmobilerv.com/  302
+# status.unitedmobilerv.com is retired. Every other path 301s to the apex.
 # Pages Functions override _redirects. This repo has no /functions routes,
 # so these rules apply to every request, including files that exist as assets.
 / https://unitedmobilerv.com/ 301
